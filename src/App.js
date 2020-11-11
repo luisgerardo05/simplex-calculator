@@ -119,14 +119,14 @@ function App() {
                     style={{backgroundColor:"#000000", color:"#FFFFFF", height:"40px", width:"15%"}} onClick={generarInputs}>Continuar</button>
                 </div>
 
-                <br/> <div id="table_inputs"></div>
+                <div id="table_inputs"></div>
                 
                 <hr/> <div className="row justify-content-center">
                   <button type="button" className="btn font-weight-bold text-uppercase" 
                     style={{backgroundColor:"#000000", color:"#FFFFFF", height:"40px", width:"15%"}} onClick={resolverEjercicio}>Resolver</button>
                 </div>
 
-                <br/> <div id="solucion_optima"></div>
+                <div id="solucion_optima"></div>
               </div>
             </div>
           </div>
@@ -135,7 +135,6 @@ function App() {
     </div>
   );
 }
-
 export default App;
 
 var tipo_operacion = 1; //1 es maximizacion
@@ -147,7 +146,6 @@ var cantidad_variables;
 var es2 = 0;
 var is_minimo = 0;
 var hacer_uno;
-
 
 const resolverEjercicio = () => {
   if (clic_generar === false) {
@@ -206,7 +204,6 @@ const inicializarMatriz = (matriz, num_filas, num_col) => {
 
 const estandarizarEcuaciones = matriz => {
   cantidad_variables = numero_variables;
-  // inicializarMatriz(matriz, numero_restricciones, total + 2); //
   for (var i = 1; i <= numero_restricciones; i++) {
     for (var j = 0; j <= numero_variables; j++) {
       if (j === numero_variables)
@@ -254,7 +251,7 @@ const generarSolucion = () => {
 
   //Desplegamos en pantalla cuales variables se les añadieron
   console.log("array_problema", array_problema);
-  var variables = "";
+  var variables = `<br/>`;
   document.getElementById("solucion_optima").innerHTML += variables;
   var aux_i, aux_numero_variables = numero_variables;
   aux_numero_variables++;
@@ -289,32 +286,26 @@ const generarSolucion = () => {
 
   validarEntrada(array_problema);
 
-  //var str_table = "<div align='center'><br><h2>Restriciones</h2></div>"; //
   var str_table = "";
   document.getElementById("solucion_optima").innerHTML += str_table;
-  // imprimeTabla(array_problema, numero_restricciones - 1, numero_variables); //
   inicializarMatriz(tabla_a, numero_restricciones, total + 2);
-  // imprimeTabla(tabla_a, numero_restricciones, total + 1); //
   estandarizarEcuaciones(tabla_a);
   if (cont_eses !== numero_restricciones) {
     imprimeTabla(tabla_a, numero_restricciones, total + 1);
     str_table =
-      "<br/><div align='center'><br/><h4>Tabla con eliminación de unos</h4></div>";
+      "<div align='center'><br/><h4>Tabla con eliminación de unos</h4></div>";
     document.getElementById("solucion_optima").innerHTML += str_table;
     calcularWPrima(tabla_a);
     imprimeTabla(tabla_a, numero_restricciones, total + 1);
-    str_table = "<br/><div align='center'><br/><h4>Primera Fase</h4></div>"; //align = 'center'
+    str_table = "<div align='center'><br/><h4>Primera Fase</h4></div>";
     document.getElementById("solucion_optima").innerHTML += str_table;
     primeraFase(tabla_a);
   }
   es2++;
-  //imprimeTabla(tabla_a, numero_restricciones, total+1);
   str_table = "<br/><div align='center'><br/><h4>Segunda Fase</h4></div>";
   document.getElementById("solucion_optima").innerHTML += str_table;
   iniciarSegundaFase(tabla_a);
-  //imprimeTabla(tabla_b, numero_restricciones, total - array_borrar_pos_artifi.length+1);
   segundaFase();
-  //imprimeTabla(tabla_b, numero_restricciones, total - array_borrar_pos_artifi.length+1);
 };
 
 //Calculamos la primera fase con el tabla
@@ -362,7 +353,6 @@ const primeraFase = matriz => {
 
     for (let j = 1; j <= total + 1; j++) {
       matriz[sale_min][j] /= hacer_uno;
-      //matriz[sale_min][j] = parseFloat(matriz[sale_min][j]);
     }
 
     //imprimeTabla(matriz, numero_restricciones, total+1);
@@ -407,7 +397,6 @@ const iniciarSegundaFase = matriz => {
 };
 
 const segundaFase = () => {
-  //imprimeTabla(tabla_b, numero_restricciones, total - array_borrar_pos_artifi.length+1);
   if (tipo_operacion === 0) {
     // var str_table =
     //   "<br><div align='center'><h4>Es minimización, hacemos ajuste de Z</h4></div>";
@@ -426,7 +415,6 @@ const segundaFase = () => {
   }
 
   finalizarFase(tabla_b);
-  //imprimeTabla(tabla_b, numero_restricciones, total - array_borrar_pos_artifi.length+1);
 };
 
 const finalizarFase = matriz => {
@@ -441,7 +429,6 @@ const finalizarFase = matriz => {
       salda = 10000000000;
     bandera = 0;
 
-    //console.log(entra);
     var str_table =
       "<br><div align='center'><br/><h6>Iteración " + iteracion++ + "<h6></div>";
     document.getElementById("solucion_optima").innerHTML += str_table;
