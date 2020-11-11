@@ -154,6 +154,7 @@ const resolverEjercicio = () => {
     //   content: "Aún no ha llenado la tabla",
     //   okText: "OK"
     // });
+    console.log("alerta");
   } else {
     inicializarMatriz(
       array_problema,
@@ -346,9 +347,10 @@ const primeraFase = matriz => {
     // Calculamos las variables de la siguiente iteracion
     var hacer_uno_a = matriz[sale_min][entra_max];
     hacer_uno = parseFloat(hacer_uno_a);
+    var sale_min_aux = sale_min;
 
     str_table = "<div align='center'><br/><p>Entra X" + entra_max + "</p>";
-    str_table += "<p>Sale Renglon" + sale_min++ + "</p></div>";
+    str_table += "<p>Sale Renglon" + sale_min_aux++ + "</p></div>";
     document.getElementById("solucion_optima").innerHTML += str_table;
 
     for (let j = 1; j <= total + 1; j++) {
