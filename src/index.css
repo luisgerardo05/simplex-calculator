@@ -12,3 +12,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#my_table {
+  text-align: center;
+  margin: auto;
+  align-content: center;
+  width: 450px;
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+
+#my_table tr,
+#my_table td {
+  width: 200px;
+  background: #fdfefe;
+  border-bottom: 1px solid #fff;
+  color: #212f3c;
+  border: 1px solid #acb1ac;
+}
+
+#my_table th {
+  width: 200px;
+  background-color: #212f3c;
+  color: #fdfefe;
+}
