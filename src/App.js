@@ -252,6 +252,41 @@ const generarSolucion = () => {
     else cont_eses += 2;
   total = cont_eses + numero_variables;
 
+  //Desplegamos en pantalla cuales variables se les añadieron
+  console.log("array_problema", array_problema);
+  var variables = "";
+  document.getElementById("solucion_optima").innerHTML += variables;
+  var aux_i, aux_numero_variables = numero_variables;
+  aux_numero_variables++;
+  for (let i = 0; i < numero_restricciones; i++) {
+    if (array_problema[i][numero_variables + 1] === "<=") {
+      aux_i = i + 1;
+      variables = 
+      `<div align='center'>
+        <label>Restricción ` + aux_i + ` es de tipo <= y se le agrega la variable de holgura X` + aux_numero_variables++ + ` </label>
+      </div>`;
+      document.getElementById("solucion_optima").innerHTML += variables;
+
+    } else if (array_problema[i][numero_variables + 1] === "=") {
+      aux_i = i + 1;
+      variables = 
+      `<div align='center'>
+        <label>Restricción ` + aux_i + ` es de tipo = y se le agrega la variable artificial X` + aux_numero_variables++ + `</label>
+      </div>`;
+      document.getElementById("solucion_optima").innerHTML += variables;
+
+    } else if (array_problema[i][numero_variables + 1] === ">=") {
+      aux_i = i + 1;
+      variables = 
+      `<div align='center'>
+        <label>Restricción ` + aux_i + ` es de tipo >= y se le agrega la variable de exceso X` + aux_numero_variables++ + ` y la variable artificial X` + aux_numero_variables++ + `</label>
+      </div>`;
+      document.getElementById("solucion_optima").innerHTML += variables;
+    }
+  }
+  variables = `<br/>`;
+  document.getElementById("solucion_optima").innerHTML += variables;
+
   validarEntrada(array_problema);
 
   //var str_table = "<div align='center'><br><h2>Restriciones</h2></div>"; //
@@ -322,7 +357,7 @@ const primeraFase = matriz => {
     hacer_uno = parseFloat(hacer_uno_a);
 
     str_table = "<div align='center'><br/><p>Entra X" + entra_max + "</p>";
-    str_table += "<p>Sale Renglon" + sale_min + "</p></div>";
+    str_table += "<p>Sale Renglon" + sale_min++ + "</p></div>";
     document.getElementById("solucion_optima").innerHTML += str_table;
 
     for (let j = 1; j <= total + 1; j++) {
@@ -374,9 +409,9 @@ const iniciarSegundaFase = matriz => {
 const segundaFase = () => {
   //imprimeTabla(tabla_b, numero_restricciones, total - array_borrar_pos_artifi.length+1);
   if (tipo_operacion === 0) {
-    var str_table =
-      "<br><div align='center'><h4>Es minimización, hacemos ajuste de Z</h4></div>";
-    document.getElementById("solucion_optima").innerHTML += str_table;
+    // var str_table =
+    //   "<br><div align='center'><h4>Es minimización, hacemos ajuste de Z</h4></div>";
+    // document.getElementById("solucion_optima").innerHTML += str_table;
     imprimeTabla(
       tabla_b,
       numero_restricciones,
